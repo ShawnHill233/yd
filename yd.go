@@ -5,7 +5,6 @@ import (
 	"os"
 	"net/http"
 	"io/ioutil"
-	"reflect"
 	// "encoding/json"
 	"github.com/bitly/go-simplejson"
 )
@@ -29,13 +28,13 @@ func main() {
 		fmt.Sprintf("while reading %s: %v", request_url, err)
 		os.Exit(1)
 	}
-	fmt.Println(reflect.TypeOf(b))
 	// fmt.Printf("%s", b)
 	js, err := simplejson.NewJson(b)
 	if err != nil {
 		fmt.Sprint(err)
+		return
   }
-  explains := js.Get("basic").Get("explains").MustArray()
-  fmt.Println(explains)
+  explains := js.Get("translation").MustArray()
+  fmt.Println(explains[0])
 }
 
