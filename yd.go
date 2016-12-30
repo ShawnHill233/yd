@@ -10,6 +10,11 @@ import (
 )
 
 func main() {
+	if len(os.Args) == 1 {
+		fmt.Println("eg: yd hello")
+		fmt.Println("eg: yd hello world")
+		return
+	}
 	var q, sep string
 	for i := 1; i < len(os.Args); i++ {
 		q += sep + os.Args[i]
@@ -34,7 +39,15 @@ func main() {
 		fmt.Sprint(err)
 		return
   }
-  explains := js.Get("translation").MustArray()
-  fmt.Println(explains[0])
+  // explains := js.Get("translation").MustArray()
+  if len(os.Args) == 2 {
+  	explains := js.Get("basic").Get("explains").MustArray()
+  	for i := 0; i < len(explains); i++ {
+  		fmt.Println(explains[i])
+ 		}
+  }else{
+  	explains := js.Get("translation").MustArray()
+  	fmt.Println(explains[0])
+  }
 }
 
